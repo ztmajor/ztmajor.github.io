@@ -8,7 +8,7 @@ export const siteConfig = {
   title: 'AI Engineer · Portfolio',
 
   /** 左上角品牌标记（建议 2-4 个字符） */
-  brand: 'AI/ztmajor',
+  brand: 'Info/ztmajor',
 
   /** 导航项：id 需与首页 section 的 id 对应，用于滚动定位与高亮 */
   nav: [
@@ -19,12 +19,12 @@ export const siteConfig = {
 
   hero: {
     /** 标题上方的小字（等宽字体，字距拉开） */
-    eyebrow: 'AI ENGINEER / 人工智能工程师',
+    eyebrow: '人工智能工程师 / AI ENGINEER',
     /** 大标题，逐行渲染。accent: true 的行使用电光蓝 */
     titleLines: [
-      { text: 'Building', accent: false },
-      { text: 'Intelligent', accent: true },
-      { text: 'Playthings.', accent: false },
+      { text: 'Curious.', accent: false },
+      { text: 'Systematic.', accent: true },
+      { text: 'Playful.', accent: false },
     ],
     /** 副标题（中文细体） */
     subtitle:
@@ -41,7 +41,7 @@ export const siteConfig = {
       { label: '查看个人信息', href: '#profile', variant: 'ghost' },
     ],
     /** 底部滚动提示 */
-    scrollHint: 'SCROLL',
+    scrollHint: '下滑 / SCROLL',
   },
 
   footer: {
