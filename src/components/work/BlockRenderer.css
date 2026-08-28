@@ -1,0 +1,372 @@
+/* ==========================================================================
+   BlockRenderer —— 详情页内容块样式
+   ========================================================================== */
+
+/* ---------------- 标题 ---------------- */
+
+.blk-h2 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-zh);
+  font-size: 24px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.04em;
+  color: var(--text-1);
+  margin: 62px 0 22px;
+}
+
+.blk-h2:first-child {
+  margin-top: 0;
+}
+
+.blk-h2__bar {
+  width: 3px;
+  height: 18px;
+  flex: none;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.blk-h3 {
+  font-family: var(--font-zh);
+  font-size: 16.5px;
+  font-weight: var(--w-normal);
+  letter-spacing: 0.05em;
+  color: var(--text-1);
+  margin: 34px 0 14px;
+}
+
+.blk-h3::before {
+  content: '# ';
+  font-family: var(--font-mono);
+  color: var(--accent-dim);
+  font-weight: var(--w-light);
+}
+
+/* ---------------- 段落 ---------------- */
+
+.blk-p {
+  font-family: var(--font-zh);
+  font-size: 16px;
+  font-weight: var(--w-thin);
+  line-height: 2;
+  color: var(--text-2);
+  margin: 0 0 18px;
+  max-width: 76ch;
+}
+
+.blk-p strong {
+  font-weight: var(--w-normal);
+  color: var(--text-1);
+}
+
+/* ---------------- 列表 ---------------- */
+
+.blk-list {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 82ch;
+}
+
+.blk-list li {
+  position: relative;
+  padding-left: 20px;
+  font-family: var(--font-zh);
+  font-size: 15px;
+  font-weight: var(--w-thin);
+  line-height: 1.95;
+  color: var(--text-2);
+}
+
+/* 方块项目符号 */
+.blk-list__marker {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  opacity: 0.55;
+  transform: rotate(45deg);
+  transition:
+    opacity var(--t-fast) var(--ease-out),
+    box-shadow var(--t-fast) var(--ease-out);
+}
+
+.blk-list li:hover .blk-list__marker {
+  opacity: 1;
+  box-shadow: 0 0 9px var(--accent-glow);
+}
+
+.blk-list__term {
+  color: var(--text-1);
+  font-weight: var(--w-normal);
+}
+
+.blk-list__term::after {
+  content: ' — ';
+  color: var(--text-4);
+  font-weight: var(--w-thin);
+}
+
+/* ---------------- 图片组 ---------------- */
+
+.blk-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin: 26px 0 30px;
+}
+
+.blk-fig {
+  margin: 0;
+}
+
+/* 统一成固定比例的画框，图片按 contain 居中。
+   这样竖版截图和横版图表混排时不会互相撑破版面。 */
+.blk-fig__frame {
+  position: relative;
+  /* 默认 4/3，可被 block.frame 覆盖 */
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-md);
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--accent-faint), transparent 62%),
+    var(--bg-0);
+  transition:
+    border-color var(--t-mid) var(--ease-out),
+    box-shadow var(--t-mid) var(--ease-out);
+}
+
+.blk-fig__frame:hover {
+  border-color: var(--accent-soft);
+  box-shadow: 0 10px 34px -14px var(--accent-glow);
+}
+
+.blk-fig img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-sm);
+  /* 素材多为亮色截图，默认压暗压饱和，hover 才还原 */
+  filter: brightness(0.78) saturate(0.85);
+  transition:
+    filter var(--t-mid) var(--ease-out),
+    transform var(--t-slow) var(--ease-out);
+}
+
+.blk-fig__frame:hover img {
+  filter: none;
+  transform: scale(1.015);
+}
+
+/* 右下角 HUD 小角标 */
+.blk-fig__corner {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 14px;
+  height: 14px;
+  border-right: 1px solid var(--accent-soft);
+  border-bottom: 1px solid var(--accent-soft);
+  opacity: 0;
+  transition: opacity var(--t-mid) var(--ease-out);
+}
+
+.blk-fig__frame:hover .blk-fig__corner {
+  opacity: 1;
+}
+
+.blk-fig figcaption {
+  margin-top: 9px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.07em;
+  color: var(--text-4);
+  text-align: center;
+}
+
+/* ---------------- 卡片组 ---------------- */
+
+.blk-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 24px 0 30px;
+}
+
+.blk-card {
+  position: relative;
+  padding: 20px 22px;
+  border: 1px solid var(--line-1);
+  border-left: 2px solid var(--accent-soft);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  background: linear-gradient(100deg, var(--accent-faint), transparent 55%), var(--bg-2);
+  transition:
+    border-left-color var(--t-mid) var(--ease-out),
+    transform var(--t-mid) var(--ease-out);
+}
+
+.blk-card:hover {
+  border-left-color: var(--accent);
+  transform: translateX(3px);
+}
+
+.blk-card__idx {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 9.5px;
+  color: var(--text-4);
+}
+
+.blk-card__title {
+  font-family: var(--font-zh);
+  font-size: 15.5px;
+  font-weight: var(--w-normal);
+  color: var(--text-1);
+  margin: 0 0 9px;
+  padding-right: 34px;
+}
+
+.blk-card__text {
+  font-family: var(--font-zh);
+  font-size: 14px;
+  font-weight: var(--w-thin);
+  line-height: 1.95;
+  color: var(--text-2);
+  margin: 0;
+}
+
+/* ---------------- 代码 / 目录树 ---------------- */
+
+.blk-code {
+  margin: 22px 0 30px;
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-md);
+  background: var(--bg-0);
+  overflow: hidden;
+}
+
+.blk-code__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--line-1);
+  background: var(--tint-2);
+}
+
+.blk-code__dots {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.blk-code__dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-3);
+}
+
+.blk-code__dots i:first-child {
+  background: var(--accent-dim);
+}
+
+.blk-code__lang {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-4);
+}
+
+.blk-code pre {
+  margin: 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--w-light);
+  line-height: 1.85;
+  color: var(--text-2);
+  tab-size: 2;
+}
+
+.blk-code code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* ---------------- 流程链 ---------------- */
+
+.blk-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0 30px;
+  padding: 16px 18px;
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-md);
+  background: var(--tint-2);
+}
+
+.blk-flow__step {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  font-family: var(--font-zh);
+  font-size: 13px;
+  font-weight: var(--w-light);
+  color: var(--text-2);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  background: var(--bg-2);
+  transition:
+    color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.blk-flow__step:hover {
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+.blk-flow__idx {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-dim);
+}
+
+/* 步骤之间的箭头 */
+.blk-flow__step:not(:last-child)::after {
+  content: '→';
+  margin-left: 4px;
+  color: var(--text-4);
+  font-family: var(--font-mono);
+}
+
+/* 亮色下图集按原样展示，只轻微降饱和 */
+[data-theme='light'] .blk-fig img {
+  filter: saturate(0.94);
+}
+
+[data-theme='light'] .blk-fig__frame:hover img {
+  filter: none;
+}

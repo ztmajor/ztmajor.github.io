@@ -1,0 +1,47 @@
+/* 终端打字机 */
+
+.tw {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: var(--w-light);
+  line-height: 1.95;
+  color: var(--text-3);
+  min-height: 76px;
+}
+
+.tw__line {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.tw__line--past {
+  opacity: 0.45;
+}
+
+.tw__prompt {
+  color: var(--accent-dim);
+  flex: none;
+  user-select: none;
+}
+
+.tw__caret {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  animation: tw-caret 1.05s steps(2, start) infinite;
+  transform: translateY(1px);
+}
+
+@keyframes tw-caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}

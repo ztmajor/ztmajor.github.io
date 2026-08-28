@@ -1,0 +1,153 @@
+/* ==========================================================================
+   设计 Token —— 所有颜色/字体/间距的唯一来源
+   :root 为暗色（默认），[data-theme='light'] 为亮色覆盖
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* --- 底色：极深枪铁灰 --- */
+  --bg-0: #0d0f14; /* 最底层 */
+  --bg-1: #11151c; /* 主背景 */
+  --bg-2: #161b24; /* 卡片 */
+  --bg-3: #1c232e; /* 卡片 hover / 输入框 */
+
+  /* --- 描边 --- */
+  --line-1: rgba(255, 255, 255, 0.09);
+  --line-2: rgba(255, 255, 255, 0.15);
+  --line-3: rgba(255, 255, 255, 0.24);
+
+  /* --- 叠加色：网格线、hover 底、细微表面 --- */
+  --tint-1: rgba(255, 255, 255, 0.04); /* 网格线 */
+  --tint-2: rgba(255, 255, 255, 0.028); /* 极淡表面 */
+  --tint-3: rgba(255, 255, 255, 0.05); /* hover 表面 */
+
+  /* --- 毛玻璃 / 遮罩 --- */
+  --glass: rgba(13, 15, 20, 0.66);
+  --glass-2: rgba(13, 15, 20, 0.78);
+  --veil-top: rgba(13, 15, 20, 0.45);
+  --veil-card: rgba(22, 27, 36, 0.9);
+  --card-fade: rgba(22, 27, 36, 0.55);
+  --chip-bg: rgba(13, 15, 20, 0.6);
+
+  /* --- 技能条槽位 --- */
+  --track-bg: rgba(0, 0, 0, 0.5);
+  --track-tick: rgba(13, 15, 20, 0.9);
+
+  /* --- 文字：靠字重和明度分层，不靠颜色 --- */
+  --text-1: #f4f7fb; /* 标题 */
+  --text-2: #ccd6e2; /* 正文 */
+  --text-3: #94a1b2; /* 次要 / 标签 */
+  --text-4: #6d7889; /* 极弱 / 装饰 */
+
+  /* --- 点缀色：冷冽电光蓝（唯一强调色） --- */
+  --accent: #00e5ff;
+  --accent-dim: #43ecff;
+  --accent-soft: rgba(0, 229, 255, 0.18);
+  --accent-faint: rgba(0, 229, 255, 0.08);
+  --accent-glow: rgba(0, 229, 255, 0.45);
+
+  /* --- 技能条辅助色（仅用于血条/蓝条区分，不外扩） --- */
+  --bar-hp: #00e5ff;
+  --bar-mp: #8f9dff;
+  --bar-exp: #ffc46b;
+
+  /* --- 高光（涟漪、血条尖端） --- */
+  --hl: #ffffff;
+  --hl-soft: rgba(255, 255, 255, 0.3);
+
+  /* --- 阴影 --- */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -12px rgba(0, 0, 0, 0.7);
+  --shadow-nav: 0 8px 30px -14px rgba(0, 0, 0, 0.9);
+  --shadow-accent: 0 0 0 1px var(--accent-soft), 0 8px 30px -8px var(--accent-glow);
+
+  /* --- 字体 --- */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', 'Cascadia Mono', Consolas, monospace;
+  --font-zh: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-ui: var(--font-mono), var(--font-zh);
+
+  /* 字重：整体比初版加重一档 */
+  --w-thin: 300;
+  --w-light: 400;
+  --w-normal: 500;
+  --w-medium: 600;
+
+  /* --- 布局 --- */
+  --sidebar-w: 300px;
+  --content-max: 1440px;
+  --nav-h: 64px;
+  --footer-h: 42px;
+
+  /* --- 圆角 --- */
+  --r-sm: 3px;
+  --r-md: 6px;
+  --r-lg: 10px;
+
+  /* --- 动效 --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 0.18s;
+  --t-mid: 0.35s;
+  --t-slow: 0.7s;
+
+  /* --- 层级 --- */
+  --z-glow: 0;
+  --z-content: 1;
+  --z-sidebar: 10;
+  --z-nav: 100;
+  --z-overlay: 200;
+}
+
+/* ==========================================================================
+   亮色主题：保持同一套点缀色，只翻转底色与叠加色
+   ========================================================================== */
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-0: #e4e9f0;
+  --bg-1: #eef1f6;
+  --bg-2: #ffffff;
+  --bg-3: #e6ebf2;
+
+  --line-1: rgba(16, 24, 40, 0.1);
+  --line-2: rgba(16, 24, 40, 0.16);
+  --line-3: rgba(16, 24, 40, 0.26);
+
+  --tint-1: rgba(16, 24, 40, 0.055);
+  --tint-2: rgba(16, 24, 40, 0.03);
+  --tint-3: rgba(16, 24, 40, 0.05);
+
+  --glass: rgba(238, 241, 246, 0.74);
+  --glass-2: rgba(238, 241, 246, 0.86);
+  --veil-top: rgba(228, 233, 240, 0.4);
+  --veil-card: rgba(255, 255, 255, 0.92);
+  --card-fade: rgba(255, 255, 255, 0.6);
+  --chip-bg: rgba(255, 255, 255, 0.75);
+
+  --track-bg: rgba(16, 24, 40, 0.1);
+  --track-tick: rgba(255, 255, 255, 0.95);
+
+  /* 亮底下文字需要足够深才够“实” */
+  --text-1: #0f1620;
+  --text-2: #37424f;
+  --text-3: #5d6a7a;
+  --text-4: #8794a4;
+
+  /* 电光蓝在白底上要压暗才看得清 */
+  --accent: #0090a8;
+  --accent-dim: #00778c;
+  --accent-soft: rgba(0, 144, 168, 0.2);
+  --accent-faint: rgba(0, 144, 168, 0.07);
+  --accent-glow: rgba(0, 144, 168, 0.32);
+
+  --bar-hp: #0090a8;
+  --bar-mp: #5566d8;
+  --bar-exp: #c07d16;
+
+  --hl: #ffffff;
+  --hl-soft: rgba(255, 255, 255, 0.75);
+
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.06), 0 12px 30px -14px rgba(16, 24, 40, 0.18);
+  --shadow-nav: 0 8px 26px -16px rgba(16, 24, 40, 0.32);
+}

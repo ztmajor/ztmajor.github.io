@@ -1,0 +1,138 @@
+/* ==========================================================================
+   Footer —— 极窄一条，终端状态栏观感
+   ========================================================================== */
+
+.footer {
+  position: relative;
+  z-index: var(--z-content);
+  height: var(--footer-h);
+  border-top: 1px solid var(--line-1);
+  background: var(--glass-2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.footer__inner {
+  max-width: var(--content-max);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.05em;
+  color: var(--text-4);
+}
+
+/* --- 左：终端状态 --- */
+.footer__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.footer__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 7px var(--accent);
+  animation: footer-blink 2s var(--ease-in-out) infinite;
+}
+
+@keyframes footer-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
+.footer__prompt {
+  color: var(--accent-dim);
+}
+
+.footer__label {
+  color: var(--text-3);
+}
+
+.footer__state {
+  font-family: var(--font-zh);
+  font-weight: var(--w-light);
+  color: var(--accent);
+  animation: footer-state-in 0.45s var(--ease-out);
+}
+
+@keyframes footer-state-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 终端光标 */
+.footer__caret {
+  width: 6px;
+  height: 12px;
+  background: var(--accent);
+  opacity: 0.7;
+  animation: footer-caret 1.05s steps(2, start) infinite;
+}
+
+@keyframes footer-caret {
+  0%,
+  49% {
+    opacity: 0.7;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --- 中：版权 --- */
+.footer__copy {
+  flex: 1;
+  text-align: center;
+  color: var(--text-4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- 右：颜文字签名 --- */
+.footer__sign {
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+  transition:
+    color var(--t-fast) var(--ease-out),
+    transform var(--t-mid) var(--ease-out);
+  cursor: default;
+  white-space: nowrap;
+}
+
+.footer__sign:hover {
+  color: var(--accent);
+  transform: translateY(-1px) rotate(-3deg);
+  text-shadow: 0 0 12px var(--accent-glow);
+}
+
+@media (max-width: 900px) {
+  .footer__inner {
+    padding: 0 24px;
+  }
+  .footer__copy {
+    display: none;
+  }
+}

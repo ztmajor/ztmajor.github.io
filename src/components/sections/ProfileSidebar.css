@@ -1,0 +1,283 @@
+/* ==========================================================================
+   ProfileSidebar —— 左侧 300px 固定信息栏
+   ========================================================================== */
+
+.profile {
+  position: sticky;
+  /* top 由 ProfileSidebar.jsx 按卡片高度算出（见「智能吸附」注释） */
+  top: var(--profile-top, 80px);
+  align-self: start;
+  width: var(--sidebar-w);
+  flex: none;
+}
+
+.profile__card {
+  position: relative;
+  padding: 20px 20px 18px;
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-lg);
+  background: linear-gradient(180deg, var(--bg-2), var(--card-fade));
+  box-shadow: var(--shadow-card);
+}
+
+/* 顶部一条 accent 渐变线 */
+.profile__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.55;
+}
+
+/* ---------------- 头像 ---------------- */
+
+.profile__avatar-wrap {
+  position: relative;
+  width: 64px;
+  margin: 0 auto 10px;
+}
+
+.profile__avatar {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-3);
+  border: 1px solid var(--line-2);
+  display: grid;
+  place-items: center;
+}
+
+.profile__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile__avatar-fallback {
+  font-family: var(--font-mono);
+  font-size: 27px;
+  font-weight: var(--w-thin);
+  color: var(--accent);
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* 旋转的虚线光环 */
+.profile__avatar-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px dashed var(--accent-soft);
+  animation: avatar-spin 22s linear infinite;
+}
+
+@keyframes avatar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.profile__status-dot {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-2);
+  box-shadow: 0 0 9px var(--accent);
+  animation: footer-blink 2.2s var(--ease-in-out) infinite;
+}
+
+/* ---------------- 文字 ---------------- */
+
+.profile__name {
+  text-align: center;
+  font-family: var(--font-zh);
+  font-size: 20px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.04em;
+  margin: 0 0 3px;
+}
+
+.profile__handle {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: var(--w-normal);
+  color: var(--accent);
+  margin: 0 0 9px;
+}
+
+.profile__role {
+  text-align: center;
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  color: var(--text-3);
+  margin: 0 0 11px;
+}
+
+.profile__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.profile__badge {
+  padding: 2.5px 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.07em;
+  color: var(--text-3);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  transition:
+    color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.profile__badge:hover {
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+.profile__divider {
+  display: block;
+  height: 1px;
+  margin: 11px 0;
+  background: linear-gradient(90deg, transparent, var(--line-2) 20%, var(--line-2) 80%, transparent);
+}
+
+.profile__bio p {
+  font-family: var(--font-zh);
+  font-size: 13px;
+  font-weight: var(--w-thin);
+  line-height: 1.85;
+  color: var(--text-2);
+}
+
+.profile__bio p + p {
+  margin-top: 9px;
+}
+
+/* ---------------- 分区 ---------------- */
+
+.profile__block-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  color: var(--text-3);
+  margin: 0 0 10px;
+}
+
+.profile__block-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line-1);
+}
+
+.profile__block-count {
+  order: 3;
+  font-size: 10px;
+  color: var(--accent-dim);
+  letter-spacing: 0;
+}
+
+.profile__skills {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* ---------------- 联系方式 ---------------- */
+
+.profile__contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile__contact {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 8px;
+  margin: 0 -8px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: var(--w-light);
+  color: var(--text-3);
+  transition:
+    background var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+
+.profile__contact:hover {
+  background: var(--accent-faint);
+  color: var(--accent);
+}
+
+.profile__contact-icon {
+  flex: none;
+  color: var(--text-4);
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.profile__contact:hover .profile__contact-icon {
+  color: var(--accent);
+}
+
+.profile__contact-label {
+  flex: none;
+  min-width: 52px;
+}
+
+.profile__contact-value {
+  flex: 1;
+  text-align: right;
+  color: var(--text-4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.profile__contact:hover .profile__contact-value {
+  color: var(--text-2);
+}
+
+/* ---------------- 签名 ---------------- */
+
+.profile__motto {
+  margin: 14px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-1);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.04em;
+  color: var(--text-4);
+  text-align: center;
+}
+
+/* 窄屏：取消 sticky，改为常规块 */
+@media (max-width: 1024px) {
+  .profile {
+    position: static;
+    width: 100%;
+  }
+}

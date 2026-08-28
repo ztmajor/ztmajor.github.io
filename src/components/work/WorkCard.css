@@ -1,0 +1,313 @@
+/* ==========================================================================
+   WorkCard —— 作品卡片（封面在上、信息在下）
+   ========================================================================== */
+
+.wcard {
+  position: relative;
+  /* 同一行的卡片等高 */
+  height: 100%;
+}
+
+.wcard__link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-lg);
+  background: var(--bg-2);
+  color: inherit;
+  transition:
+    border-color var(--t-mid) var(--ease-out),
+    background var(--t-mid) var(--ease-out),
+    transform var(--t-mid) var(--ease-out),
+    box-shadow var(--t-mid) var(--ease-out);
+}
+
+.wcard__link:hover {
+  border-color: var(--accent-soft);
+  background: var(--bg-3);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-accent);
+}
+
+/* ---------------- 封面 ---------------- */
+
+.wcard__cover {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  background: var(--bg-0);
+  border-bottom: 1px solid var(--line-1);
+}
+
+.wcard__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 默认压低饱和与亮度，hover 才「点亮」 */
+  filter: grayscale(0.62) brightness(0.66) contrast(1.05);
+  transform: scale(1.02);
+  transition:
+    filter var(--t-slow) var(--ease-out),
+    transform var(--t-slow) var(--ease-out);
+}
+
+.wcard__link:hover .wcard__cover img {
+  filter: grayscale(0) brightness(0.94) contrast(1);
+  transform: scale(1.05);
+}
+
+.wcard__cover-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-4);
+}
+
+/* 顶部压暗 + 底部融入卡片 */
+.wcard__cover-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, var(--veil-top), transparent 40%),
+    linear-gradient(0deg, var(--veil-card), transparent 55%);
+}
+
+/* hover 时一条光带扫过封面 */
+.wcard__cover-scan {
+  position: absolute;
+  top: -40%;
+  bottom: -40%;
+  left: -60%;
+  width: 40%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(0, 229, 255, 0.14) 45%,
+    rgba(255, 255, 255, 0.16) 52%,
+    transparent
+  );
+  transform: skewX(-16deg);
+  opacity: 0;
+}
+
+.wcard__link:hover .wcard__cover-scan {
+  animation: wcard-scan 0.85s var(--ease-in-out);
+}
+
+@keyframes wcard-scan {
+  0% {
+    left: -60%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+.wcard__index {
+  position: absolute;
+  top: 11px;
+  left: 13px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-2);
+  padding: 2px 7px;
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  background: var(--chip-bg);
+  backdrop-filter: blur(6px);
+  transition:
+    color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.wcard__link:hover .wcard__index {
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+/* ---------------- 内容 ---------------- */
+
+.wcard__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 16px 18px 17px;
+}
+
+.wcard__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.wcard__eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  color: var(--text-3);
+}
+
+.wcard__year {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: var(--w-light);
+  color: var(--text-4);
+}
+
+.wcard__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 21px;
+  font-weight: var(--w-thin);
+  letter-spacing: -0.02em;
+  margin: 0 0 9px;
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.wcard__link:hover .wcard__title {
+  color: var(--accent);
+}
+
+.wcard__arrow {
+  color: var(--text-4);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity var(--t-mid) var(--ease-out),
+    transform var(--t-mid) var(--ease-out),
+    color var(--t-mid) var(--ease-out);
+}
+
+.wcard__link:hover .wcard__arrow {
+  color: var(--accent);
+  opacity: 1;
+  transform: none;
+}
+
+.wcard__summary {
+  font-family: var(--font-zh);
+  font-size: 13px;
+  font-weight: var(--w-thin);
+  line-height: 1.85;
+  color: var(--text-2);
+  margin: 0 0 14px;
+  /* 限 3 行，避免不同长度的摘要把卡片高度拉开 */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------------- 关键数据 ---------------- */
+
+.wcard__stats {
+  display: flex;
+  gap: 0;
+  margin: auto 0 13px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line-1);
+  border-bottom: 1px solid var(--line-1);
+}
+
+.wcard__stat {
+  flex: 1;
+  padding: 0 11px;
+  border-left: 1px solid var(--line-1);
+}
+
+.wcard__stat:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.wcard__stat dt {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--w-normal);
+  letter-spacing: 0.15em;
+  color: var(--text-4);
+  margin-bottom: 3px;
+}
+
+.wcard__stat dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: var(--w-light);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  transition: text-shadow var(--t-mid) var(--ease-out);
+}
+
+.wcard__link:hover .wcard__stat dd {
+  text-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* ---------------- 标签 ---------------- */
+
+.wcard__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wcard__tag {
+  padding: 3px 9px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.05em;
+  color: var(--text-3);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  transition:
+    color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.wcard__link:hover .wcard__tag {
+  color: var(--text-2);
+  border-color: var(--line-3);
+}
+
+/* 卡片右下角柔光，仅 hover 出现 */
+.wcard__glow {
+  position: absolute;
+  right: -60px;
+  bottom: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-soft), transparent 66%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-slow) var(--ease-out);
+}
+
+.wcard__link:hover .wcard__glow {
+  opacity: 1;
+}
+
+/* 亮色下不要把截图压暗，改成轻微提亮降饱和 */
+[data-theme='light'] .wcard__cover img {
+  filter: grayscale(0.34) brightness(1.02) contrast(0.98);
+}
+
+[data-theme='light'] .wcard__link:hover .wcard__cover img {
+  filter: none;
+}

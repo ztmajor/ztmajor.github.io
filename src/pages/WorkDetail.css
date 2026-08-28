@@ -1,0 +1,301 @@
+/* ==========================================================================
+   WorkDetail —— 作品详情页
+   ========================================================================== */
+
+.wd {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* ---------------- Hero ---------------- */
+
+.wd__hero {
+  position: relative;
+  padding: calc(var(--nav-h) + 56px) 0 54px;
+  overflow: hidden;
+  background: var(--bg-0);
+}
+
+.wd__hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wd__hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--tint-1) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tint-1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 80% at 30% 10%, #000, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 30% 10%, #000, transparent 72%);
+}
+
+.wd__hero-blob {
+  position: absolute;
+  top: -30%;
+  left: -8%;
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  filter: blur(96px);
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.13), transparent 68%);
+}
+
+.wd__hero-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--bg-1), transparent 42%);
+}
+
+.wd__hero-inner {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ---------------- 返回链接 ---------------- */
+
+.wd__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: var(--w-normal);
+  letter-spacing: 0.18em;
+  color: var(--text-3);
+  margin-bottom: 34px;
+}
+
+.wd__back:hover {
+  color: var(--accent);
+}
+
+.wd__back svg {
+  transition: transform var(--t-fast) var(--ease-out);
+}
+
+.wd__back:hover svg {
+  transform: translateX(-3px);
+}
+
+/* ---------------- 标题 ---------------- */
+
+.wd__eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: var(--accent-dim);
+  margin: 0 0 14px;
+}
+
+.wd__title {
+  font-family: var(--font-mono);
+  font-size: clamp(42px, 5.6vw, 76px);
+  font-weight: var(--w-thin);
+  letter-spacing: -0.035em;
+  color: var(--text-1);
+  margin: 0 0 20px;
+  animation: wd-in 0.9s var(--ease-out) both;
+}
+
+@keyframes wd-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.wd__tagline {
+  max-width: 66ch;
+  font-family: var(--font-zh);
+  font-size: 16px;
+  font-weight: var(--w-thin);
+  line-height: 2;
+  color: var(--text-2);
+  margin: 0 0 30px;
+}
+
+/* ---------------- 按钮 / 标签 ---------------- */
+
+.wd__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.wd__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wd__tag {
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  transition:
+    color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.wd__tag:hover {
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+/* ---------------- 关键数据 ---------------- */
+
+.wd__stats {
+  display: flex;
+  gap: 0;
+  margin: 38px 0 0;
+  border-top: 1px solid var(--line-1);
+  padding-top: 18px;
+}
+
+.wd__stat {
+  padding-right: 42px;
+  margin-right: 42px;
+  border-right: 1px solid var(--line-1);
+}
+
+.wd__stat:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.wd__stat dt {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-4);
+  margin-bottom: 5px;
+}
+
+.wd__stat dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: var(--w-light);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- 正文 ---------------- */
+
+.wd__body {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 46px 40px 100px;
+}
+
+/* ---------------- 上下篇导航 ---------------- */
+
+.wd__nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  margin-top: 76px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line-1);
+}
+
+.wd__nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 14px 18px;
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  transition:
+    border-color var(--t-mid) var(--ease-out),
+    transform var(--t-mid) var(--ease-out),
+    background var(--t-mid) var(--ease-out);
+}
+
+.wd__nav-item--next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.wd__nav-item:hover {
+  border-color: var(--accent-soft);
+  background: var(--bg-3);
+}
+
+.wd__nav-item--prev:hover {
+  transform: translateX(-4px);
+}
+
+.wd__nav-item--next:hover {
+  transform: translateX(4px);
+}
+
+.wd__nav-item .mono-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--text-4);
+}
+
+.wd__nav-title {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: var(--w-light);
+  color: var(--text-1);
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.wd__nav-item:hover .wd__nav-title {
+  color: var(--accent);
+}
+
+.wd__nav-all {
+  font-family: var(--font-zh);
+  font-size: 13px;
+  font-weight: var(--w-light);
+  letter-spacing: 0.1em;
+  color: var(--text-3);
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--line-2);
+  white-space: nowrap;
+}
+
+.wd__nav-all:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+@media (max-width: 1100px) {
+  .wd__hero-inner,
+  .wd__body {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .wd__stat {
+    padding-right: 26px;
+    margin-right: 26px;
+  }
+}
+
+/* 亮色下详情页顶部柔光收一档 */
+[data-theme='light'] .wd__hero-blob {
+  opacity: 0.4;
+}

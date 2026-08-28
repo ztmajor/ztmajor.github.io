@@ -1,0 +1,89 @@
+/* ==========================================================================
+   ThemeToggle —— 昼夜模式胶囊开关
+   ========================================================================== */
+
+.tt {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 62px;
+  height: 28px;
+  padding: 0 7px;
+  flex: none;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: var(--tint-2);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color var(--t-fast) var(--ease-out),
+    background var(--t-fast) var(--ease-out),
+    box-shadow var(--t-mid) var(--ease-out);
+}
+
+.tt:hover {
+  border-color: var(--accent-soft);
+  background: var(--accent-faint);
+  box-shadow: 0 0 0 1px var(--accent-faint), 0 4px 16px -8px var(--accent-glow);
+}
+
+/* --- 滑块 --- */
+.tt__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--accent), var(--accent-dim));
+  box-shadow:
+    0 0 10px -1px var(--accent-glow),
+    inset 0 1px 0 var(--hl-soft);
+  transition: transform var(--t-mid) var(--ease-out);
+}
+
+.tt.is-light .tt__knob {
+  transform: translateX(32px);
+}
+
+/* --- 图标 --- */
+.tt__icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  color: var(--text-4);
+  transition: color var(--t-mid) var(--ease-out);
+}
+
+.tt__icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 当前生效的一侧被滑块盖住，图标压暗；未生效的一侧提亮 */
+.tt__icon--moon {
+  color: var(--bg-0);
+}
+
+.tt__icon--sun {
+  color: var(--text-3);
+}
+
+.tt.is-light .tt__icon--moon {
+  color: var(--text-3);
+}
+
+.tt.is-light .tt__icon--sun {
+  color: var(--bg-0);
+}
+
+.tt:hover .tt__icon--sun,
+.tt.is-light:hover .tt__icon--moon {
+  color: var(--accent);
+}

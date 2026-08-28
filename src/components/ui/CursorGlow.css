@@ -1,0 +1,54 @@
+/* 光标跟随光晕：固定全屏、不吃事件、压在内容下面 */
+
+.cursor-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-glow);
+  overflow: hidden;
+}
+
+/* 大范围柔光 */
+.cursor-layer__radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    460px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh),
+    rgba(0, 229, 255, 0.075),
+    rgba(0, 229, 255, 0.03) 38%,
+    transparent 68%
+  );
+  transition: opacity var(--t-slow) var(--ease-out);
+}
+
+/* 几何光晕环：细边、带一点呼吸 */
+.cursor-layer__ring {
+  position: absolute;
+  left: var(--cursor-x, 50vw);
+  top: var(--cursor-y, 50vh);
+  width: 220px;
+  height: 220px;
+  margin: -110px 0 0 -110px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 255, 0.07);
+  box-shadow: inset 0 0 60px rgba(0, 229, 255, 0.035);
+  animation: cursor-breathe 5s var(--ease-in-out) infinite;
+}
+
+@keyframes cursor-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.09);
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .cursor-layer {
+    display: none;
+  }
+}

@@ -1,0 +1,261 @@
+/* ==========================================================================
+   RippleButton —— SSR 出货闪光点击特效
+   ========================================================================== */
+
+.rb {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--w-normal);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out),
+    background var(--t-fast) var(--ease-out),
+    transform var(--t-fast) var(--ease-out),
+    box-shadow var(--t-mid) var(--ease-out);
+}
+
+.rb__label {
+  position: relative;
+  z-index: 2;
+}
+
+.rb:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+/* --- primary：实心电光蓝细描边 --- */
+.rb--primary {
+  color: var(--accent);
+  background: var(--accent-faint);
+  border: 1px solid var(--accent-soft);
+}
+
+.rb--primary:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft), 0 6px 24px -8px var(--accent-glow);
+}
+
+/* --- ghost：只有描边 --- */
+.rb--ghost {
+  color: var(--text-2);
+  background: transparent;
+  border: 1px solid var(--line-2);
+}
+
+.rb--ghost:hover {
+  color: var(--accent);
+  border-color: var(--accent-soft);
+  background: var(--tint-2);
+}
+
+/* --- bare：无外观，仅提供特效（供卡片/链接复用） --- */
+.rb--bare {
+  padding: 0;
+  border: none;
+  background: none;
+  text-transform: none;
+  letter-spacing: normal;
+  border-radius: inherit;
+}
+
+/* ---------------- 特效层 ---------------- */
+
+.rb__burst {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* 涟漪：以点击点为圆心扩散的亮环 */
+.rb__ripple {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.85) 0%,
+      var(--accent) 22%,
+      var(--accent-glow) 45%,
+      transparent 70%
+    );
+  animation: rb-ripple 0.72s var(--ease-out) forwards;
+}
+
+@keyframes rb-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0;
+  }
+}
+
+/* 高光斜扫：抽卡卡面反光 */
+.rb__sheen {
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  left: -70%;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    rgba(255, 255, 255, 0.7) 50%,
+    var(--accent-glow) 62%,
+    transparent 100%
+  );
+  filter: blur(0.5px);
+  transform: skewX(-18deg);
+  animation: rb-sheen 0.62s var(--ease-in-out) forwards;
+}
+
+@keyframes rb-sheen {
+  0% {
+    left: -70%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    left: 125%;
+    opacity: 0;
+  }
+}
+
+/* 边框爆闪 */
+.rb__flash {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 0 24px 2px var(--accent-glow);
+  animation: rb-flash 0.5s var(--ease-out) forwards;
+}
+
+@keyframes rb-flash {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 四射星芒 */
+.rb__spark {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.rb__spark i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 2px;
+  transform: rotate(var(--a));
+  transform-origin: 0 0;
+}
+
+.rb__spark i::before {
+  content: '';
+  position: absolute;
+  left: -50%;
+  top: -1px;
+  height: 1.5px;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #fff 45%, var(--accent) 55%, transparent);
+  animation: rb-spark 0.55s var(--ease-out) forwards;
+}
+
+@keyframes rb-spark {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    width: 130px;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rb__burst {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   亮色主题：白闪在白底上看不见，把闪光换成点缀色
+   -------------------------------------------------------------------------- */
+
+[data-theme='light'] .rb__ripple {
+  background: radial-gradient(
+    circle,
+    var(--accent) 0%,
+    var(--accent) 20%,
+    var(--accent-glow) 46%,
+    transparent 70%
+  );
+}
+
+[data-theme='light'] .rb__sheen {
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    var(--accent-faint) 35%,
+    var(--accent-soft) 50%,
+    var(--accent-glow) 62%,
+    transparent 100%
+  );
+}
+
+[data-theme='light'] .rb__flash {
+  box-shadow:
+    inset 0 0 0 1px var(--accent),
+    0 0 24px 2px var(--accent-glow);
+}
+
+[data-theme='light'] .rb__spark i::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent) 45%,
+    var(--accent-dim) 55%,
+    transparent
+  );
+}
