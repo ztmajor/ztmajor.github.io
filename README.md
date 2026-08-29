@@ -13,12 +13,13 @@ npm run preview
 
 用的是 `HashRouter` + `base: './'`，`dist/` 可以直接丢到任意静态托管（含 GitHub Pages 子路径），刷新子路由不会 404。
 
-## 改文案：只动这三处
+## 改文案
 
 | 想改什么 | 改哪个文件 |
 | --- | --- |
 | 品牌、导航、Hero 大标题、打字机、Footer 状态与签名 | `src/config/site.config.js` |
 | 头像、姓名、简介、联系方式、技能条 | `src/config/profile.config.js` |
+| 不同语言切换文本 | `src/config/i18n.config.js` |
 | 颜色、字体、字重、间距、圆角、动效曲线 | `src/styles/tokens.css` |
 
 ## 昼夜模式
@@ -27,9 +28,13 @@ npm run preview
 
 首次访问跟随系统 `prefers-color-scheme`；手动切过之后记在 `localStorage`（键名 `myinfopage-theme`），并且不再被系统偏好覆盖。`index.html` 里有一段内联脚本在首次绘制前定好主题，避免刷新闪一下另一套配色。
 
+## 其他配色
+
 改亮色配色只需动 `tokens.css` 里 `[data-theme='light']` 那一段。
 
 技能条的 `value` 是 0-100，`type` 决定颜色：`hp` 电光蓝（核心技能）、`mp` 靛蓝紫（次要）、`exp` 琥珀金（兴趣）。
+
+## 头像
 
 头像：把图片放进 `public/`，然后把 `profile.config.js` 的 `avatar` 写成 `'./avatar.png'`；留空则显示首字母占位。
 

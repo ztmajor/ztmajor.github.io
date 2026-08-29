@@ -5,19 +5,19 @@
 const autolink = {
   slug: 'autolink',
   title: 'AutoLink',
-  eyebrow: '',
+  eyebrow: '创建者 / Creator',
   year: '2020',
   /** 卡片与列表页用的一句话摘要 */
   summary:
-    '基于图像识别与深度学习的连连看自动操作器。截图识别当前游戏情况，转成矩阵之后通过算法求解可消去方块对，再模拟点击消去方块对，并且能自动通关。',
+    '连连看自动操作器，基于OpenCV与Classification识别具体内容。截图识别当前游戏情况，转成矩阵之后通过算法求解可消去方块对，再模拟点击消去方块对，并且实现了关卡切换。',
   tags: ['PyTorch', 'OpenCV', 'Computer Vision','Win32 API', 'pyautogui'],
   /** 卡片封面图（public 下的相对路径） */
   cover: './works/autolink/cover.png',
   /** 卡片上的关键数据高亮 */
   stats: [
-    { label: '操作模式', value: '自动' },
-    { label: 'AI', value: 'CV' },
-    { label: 'MODE', value: 'AUTO' },
+    { label: '操作', value: '模拟点击' },
+    { label: 'AI', value: 'AUTO' },
+    { label: '版本', value: '稳定' },
   ],
   links: [{ label: '查看 GitHub 仓库', href: 'https://github.com/ztmajor/AutoLink', primary: true }],
 

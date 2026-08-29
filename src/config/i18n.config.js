@@ -38,7 +38,7 @@ export const i18nConfig = {
         noImage: '暂无图片',
       },
       workDetail: {
-        back: '返回作品',
+        back: '返回作品集',
         navAria: '作品导航',
         prev: '上一篇',
         next: '下一篇',

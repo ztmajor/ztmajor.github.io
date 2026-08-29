@@ -155,14 +155,14 @@
 }
 
 .wcard__eyebrow {
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0.2em;
   color: var(--text-3);
 }
 
 .wcard__year {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: var(--w-light);
   color: var(--text-4);
 }
@@ -172,7 +172,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 21px;
+  font-size: 28px;
   font-weight: var(--w-thin);
   letter-spacing: -0.02em;
   margin: 0 0 9px;
@@ -201,7 +201,7 @@
 
 .wcard__summary {
   font-family: var(--font-zh);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--w-thin);
   line-height: 1.85;
   color: var(--text-2);

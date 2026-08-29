@@ -4,16 +4,16 @@
 const dscoder = {
   slug: 'dscoder',
   title: 'DSCoder',
-  eyebrow: '',
+  eyebrow: '创建者 / Creator',
   year: '2026',
   summary:
-    'DeepSeek Harness 套壳桌面版。通过插件开发内部其他功能。',
+    'DeepSeek Harness 套壳桌面版。通过插件开发内部其他功能。内置固定版本DSH Core。',
   tags: ['Tauri', 'DeepSeek Harness', '文件树', 'highlight.js', '本地git', '自动化看板'],
   cover: './works/dscoder/ui1.png',
   stats: [
     { label: '安装包', value: '74.2M' },
     { label: '启动', value: '<3s' },
-    { label: '更新', value: '自动' },
+    { label: '版本', value: '更新中' },
   ],
   links: [{ label: '查看 GitHub 仓库', href: 'https://github.com/ztmajor/DSCoder', primary: true }],
 

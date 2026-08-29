@@ -27,7 +27,8 @@ export const profileConfig = {
   /** 联系方式：icon 支持 github / mail / blog / bilibili / x / link */
   contacts: [
     { icon: 'github', label: 'GitHub', value: 'ztmajor', href: 'https://github.com/ztmajor' },
-    // { icon: 'bilibili', label: 'Bilibili', value: 'space/xxxx', href: 'https://space.bilibili.com' },
+    { icon: 'csdn', label: 'CSDN', value: 'ztmajor', href: 'https://blog.csdn.net/ztmajor' },
+    { icon: 'bilibili', label: 'Bilibili', value: '墨影FT', href: 'https://space.bilibili.com/25806325' },
   ],
 
   /**
