@@ -4,16 +4,16 @@
 const dscoder = {
   slug: 'dscoder',
   title: 'DSCoder',
-  eyebrow: 'DESKTOP APP / AI CODING',
-  year: '2025',
+  eyebrow: '',
+  year: '2026',
   summary:
-    '干净的 AI 编码壳 —— 基于 Tauri 2 的 DeepSeek Harness 桌面版。不自绘臃肿前端，直接复用官方 Web UI 的完整能力。',
-  tags: ['Tauri 2', 'Rust', 'DeepSeek Harness'],
+    'DeepSeek Harness 套壳桌面版。通过插件开发内部其他功能。',
+  tags: ['Tauri', 'DeepSeek Harness', '文件树', 'highlight.js', '本地git', '自动化看板'],
   cover: './works/dscoder/ui1.png',
   stats: [
-    { label: 'STARTUP', value: '<1s' },
-    { label: 'RUNTIME', value: 'EMBED' },
-    { label: 'UPDATE', value: 'AUTO' },
+    { label: '安装包', value: '74.2M' },
+    { label: '启动', value: '<3s' },
+    { label: '更新', value: '自动' },
   ],
   links: [{ label: '查看 GitHub 仓库', href: 'https://github.com/ztmajor/DSCoder', primary: true }],
 
@@ -73,22 +73,6 @@ const dscoder = {
         { term: '配置与凭证', text: '完全交给官方 UI，写入 `$DSH_HOME` 下的配置与凭证文件' },
         { term: '自动更新', text: '后台检查 GitHub Releases，原生对话框确认后下载安装并重启' },
       ],
-    },
-    { type: 'subheading', text: '项目结构' },
-    {
-      type: 'code',
-      lang: 'text',
-      code: `src-tauri/
-  src/                 Rust 后端（进程监督、供给、代理、路径解析）
-  resources/           内置 dsh 插件（存在即注册）
-    dsh-tabs-terminal/
-    dsh-bottom-info-bar/
-    dsh-local-git/
-    dsh-ui-tweaks/
-  tauri.conf.json      Tauri 配置
-dist/                  启动占位页（内核就绪后跳转到官方 UI）
-docs/                  设计与分析文档
-scripts/               构建/发布脚本（预置运行时、生成 updater 清单）`,
     },
   ],
 };

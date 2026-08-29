@@ -28,7 +28,7 @@ export const siteConfig = {
     ],
     /** 副标题（中文细体） */
     subtitle:
-      '做 AI 应用的工程师。白天训模型、写推理管线，晚上把它们塞进游戏、二次元和各种奇怪的小玩意里。',
+      '',
     /** 终端打字机效果依次播放的行 */
     typewriter: [
       'initializing neural runtime...',

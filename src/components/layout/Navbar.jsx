@@ -1,15 +1,18 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import siteConfig from '../../config/site.config.js';
+import { useI18n } from '../../hooks/useI18n.jsx';
 import useScrollState from '../../hooks/useScrollState.js';
 import useActiveSection from '../../hooks/useActiveSection.js';
 import ThemeToggle from '../ui/ThemeToggle.jsx';
+import LanguageToggle from '../ui/LanguageToggle.jsx';
 
 /**
  * 顶部导航。Hero 区几乎全透明，滚动后贴顶并加毛玻璃。
  * 在作品详情页（非首页）默认保持实体态，并把导航项指回首页锚点。
  */
 export function Navbar() {
+  const { t } = useI18n();
   const scrolled = useScrollState(40);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -35,13 +38,13 @@ export function Navbar() {
   return (
     <header className={`nav ${solid ? 'nav--solid' : ''}`}>
       <div className="nav__inner">
-        <Link to="/" className="nav__brand" aria-label="返回首页">
+        <Link to="/" className="nav__brand" aria-label={t('nav.home')}>
           <span className="nav__brand-mark">{siteConfig.brand}</span>
           <span className="nav__brand-dot" aria-hidden="true" />
         </Link>
 
         <div className="nav__right">
-          <nav className="nav__links" aria-label="主导航">
+          <nav className="nav__links" aria-label={t('nav.aria')}>
             {siteConfig.nav.map((item, i) => (
               <a
                 key={item.id}
@@ -57,6 +60,7 @@ export function Navbar() {
           </nav>
 
           <span className="nav__sep" aria-hidden="true" />
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </div>

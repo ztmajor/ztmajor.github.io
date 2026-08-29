@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './WorkCard.css';
 import Icon from '../ui/Icon.jsx';
+import { useI18n } from '../../hooks/useI18n.jsx';
 import useReveal from '../../hooks/useReveal.js';
 
 /**
@@ -10,6 +11,7 @@ import useReveal from '../../hooks/useReveal.js';
  */
 export function WorkCard({ work, index = 0 }) {
   const revealRef = useReveal();
+  const { t } = useI18n();
 
   return (
     <article
@@ -17,14 +19,14 @@ export function WorkCard({ work, index = 0 }) {
       className="wcard reveal"
       style={{ transitionDelay: `${index * 90}ms` }}
     >
-      <Link to={`/works/${work.slug}`} className="wcard__link" aria-label={`查看作品 ${work.title}`}>
+      <Link to={`/works/${work.slug}`} className="wcard__link" aria-label={`${t('workCard.view')} ${work.title}`}>
         {/* --- 封面 --- */}
         <div className="wcard__cover">
           {work.cover ? (
             <img src={work.cover} alt="" loading="lazy" />
           ) : (
             <span className="wcard__cover-empty" aria-hidden="true">
-              NO IMAGE
+              {t('workCard.noImage')}
             </span>
           )}
           <span className="wcard__cover-veil" aria-hidden="true" />

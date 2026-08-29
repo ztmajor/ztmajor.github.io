@@ -25,19 +25,19 @@
 }
 
 .feed__title-en {
-  font-family: var(--font-mono);
-  font-size: 34px;
-  font-weight: var(--w-thin);
-  letter-spacing: 0.02em;
-  color: var(--text-1);
-}
-
-.feed__title-zh {
   font-family: var(--font-zh);
   font-size: 14px;
   font-weight: var(--w-light);
   letter-spacing: 0.22em;
   color: var(--text-4);
+}
+
+.feed__title-zh {
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: var(--w-thin);
+  letter-spacing: 0.02em;
+  color: var(--text-1);
 }
 
 .feed__count {

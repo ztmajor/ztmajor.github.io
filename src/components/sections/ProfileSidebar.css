@@ -32,18 +32,29 @@
   opacity: 0.55;
 }
 
-/* ---------------- 头像 ---------------- */
+/* ---------------- 头像 + 身份信息 ---------------- */
+
+.profile__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile__identity {
+  flex: 1;
+  min-width: 0;
+}
 
 .profile__avatar-wrap {
   position: relative;
-  width: 64px;
-  margin: 0 auto 10px;
+  width: 128px;
+  flex: none;
 }
 
 .profile__avatar {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   overflow: hidden;
   background: var(--bg-3);
@@ -56,11 +67,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* 图像放大 15%，超出部分由父级 overflow:hidden 裁掉 */
+  transform: scale(1.25);
 }
 
 .profile__avatar-fallback {
   font-family: var(--font-mono);
-  font-size: 27px;
+  font-size: 40px;
   font-weight: var(--w-thin);
   color: var(--accent);
   text-shadow: 0 0 20px var(--accent-glow);
@@ -99,7 +112,7 @@
 .profile__name {
   text-align: center;
   font-family: var(--font-zh);
-  font-size: 20px;
+  font-size: 24px;
   font-weight: var(--w-light);
   letter-spacing: 0.04em;
   margin: 0 0 3px;
@@ -108,7 +121,7 @@
 .profile__handle {
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: var(--w-normal);
   color: var(--accent);
   margin: 0 0 9px;
@@ -116,10 +129,13 @@
 
 .profile__role {
   text-align: center;
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0.24em;
   color: var(--text-3);
-  margin: 0 0 11px;
+  margin: 0;
+  /* letter-spacing 会在最后一个字符后也加间距，使居中文字视觉偏左；
+     用等量 padding-left 补偿，让文字真正居中 */
+  padding-left: 0.24em;
 }
 
 .profile__badges {
@@ -127,13 +143,14 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
+  margin-top: 12px;
 }
 
 .profile__badge {
   padding: 2.5px 7px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: var(--w-light);
+  font-size: 11px;
+  font-weight: var(--w-medium);
   letter-spacing: 0.07em;
   color: var(--text-3);
   border: 1px solid var(--line-2);
@@ -158,7 +175,7 @@
 .profile__bio p {
   font-family: var(--font-zh);
   font-size: 13px;
-  font-weight: var(--w-thin);
+  font-weight: var(--w-normal);
   line-height: 1.85;
   color: var(--text-2);
 }
@@ -173,7 +190,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: 0.24em;
   color: var(--text-3);
   margin: 0 0 10px;
@@ -196,7 +213,7 @@
 .profile__skills {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 16px;
 }
 
 /* ---------------- 联系方式 ---------------- */
@@ -218,7 +235,7 @@
   margin: 0 -8px;
   border-radius: var(--r-sm);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: var(--w-light);
   color: var(--text-3);
   transition:

@@ -2,12 +2,14 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './WorkDetail.css';
 import { getWorkBySlug, getWorkNeighbors } from '../content/works/index.js';
+import { useI18n } from '../hooks/useI18n.jsx';
 import BlockRenderer from '../components/work/BlockRenderer.jsx';
 import RippleButton from '../components/ui/RippleButton.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import NotFound from './NotFound.jsx';
 
 export function WorkDetail() {
+  const { t } = useI18n();
   const { slug } = useParams();
   const work = getWorkBySlug(slug);
   const { prev, next } = getWorkNeighbors(slug);
@@ -32,7 +34,7 @@ export function WorkDetail() {
         <div className="wd__hero-inner">
           <Link to="/" state={{ scrollTo: 'works' }} className="wd__back">
             <Icon name="back" size={13} />
-            BACK TO WORKS
+            {t('workDetail.back')}
           </Link>
 
           <p className="wd__eyebrow mono-label">{work.eyebrow}</p>
@@ -83,10 +85,10 @@ export function WorkDetail() {
         <BlockRenderer blocks={work.blocks} />
 
         {/* ---------------- 上下篇导航 ---------------- */}
-        <nav className="wd__nav" aria-label="作品导航">
+        <nav className="wd__nav" aria-label={t('workDetail.navAria')}>
           {prev ? (
             <Link to={`/works/${prev.slug}`} className="wd__nav-item wd__nav-item--prev">
-              <span className="mono-label">PREV</span>
+              <span className="mono-label">{t('workDetail.prev')}</span>
               <span className="wd__nav-title">{prev.title}</span>
             </Link>
           ) : (
@@ -94,12 +96,12 @@ export function WorkDetail() {
           )}
 
           <Link to="/" state={{ scrollTo: 'works' }} className="wd__nav-all">
-            全部作品
+            {t('workDetail.all')}
           </Link>
 
           {next ? (
             <Link to={`/works/${next.slug}`} className="wd__nav-item wd__nav-item--next">
-              <span className="mono-label">NEXT</span>
+              <span className="mono-label">{t('workDetail.next')}</span>
               <span className="wd__nav-title">{next.title}</span>
             </Link>
           ) : (

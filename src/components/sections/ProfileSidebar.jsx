@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './ProfileSidebar.css';
 import profileConfig from '../../config/profile.config.js';
+import { useI18n } from '../../hooks/useI18n.jsx';
 import SkillBar from '../ui/SkillBar.jsx';
 import Icon from '../ui/Icon.jsx';
 
@@ -11,6 +12,7 @@ import Icon from '../ui/Icon.jsx';
 export function ProfileSidebar() {
   const { avatar, avatarFallback, name, handle, role, bio, badges, contacts, skills, motto } =
     profileConfig;
+  const { t } = useI18n();
 
   const asideRef = useRef(null);
   const cardRef = useRef(null);
@@ -49,33 +51,27 @@ export function ProfileSidebar() {
   }, []);
 
   return (
-    <aside className="profile" aria-label="个人信息" ref={asideRef}>
+    <aside className="profile" aria-label={t('profile.aria')} ref={asideRef}>
       <div className="profile__card" ref={cardRef}>
-        {/* --- 头像 --- */}
-        <div className="profile__avatar-wrap">
-          <div className="profile__avatar">
-            {avatar ? (
-              <img src={avatar} alt={`${name} 的头像`} />
-            ) : (
-              <span className="profile__avatar-fallback">{avatarFallback}</span>
-            )}
-            <span className="profile__avatar-ring" aria-hidden="true" />
+        {/* --- 头部：左头像，右姓名 / 句柄 / 角色 --- */}
+        <div className="profile__head">
+          <div className="profile__avatar-wrap">
+            <div className="profile__avatar">
+              {avatar ? (
+                <img src={avatar} alt={`${name} 的头像`} />
+              ) : (
+                <span className="profile__avatar-fallback">{avatarFallback}</span>
+              )}
+              <span className="profile__avatar-ring" aria-hidden="true" />
+            </div>
+            <span className="profile__status-dot" title={t('profile.online')} aria-hidden="true" />
           </div>
-          <span className="profile__status-dot" title="在线" aria-hidden="true" />
-        </div>
 
-        {/* --- 姓名 --- */}
-        <h2 className="profile__name">{name}</h2>
-        <p className="profile__handle">{handle}</p>
-        <p className="profile__role mono-label">{role}</p>
-
-        {/* --- 标签 --- */}
-        <div className="profile__badges">
-          {badges.map((b) => (
-            <span key={b} className="profile__badge">
-              {b}
-            </span>
-          ))}
+          <div className="profile__identity">
+            <h2 className="profile__name">{name}</h2>
+            <p className="profile__handle">{handle}</p>
+            <p className="profile__role mono-label">{role}</p>
+          </div>
         </div>
 
         <span className="profile__divider" aria-hidden="true" />
@@ -89,9 +85,20 @@ export function ProfileSidebar() {
 
         <span className="profile__divider" aria-hidden="true" />
 
+        {/* --- 标签 --- */}
+        <div className="profile__badges">
+          {badges.map((b) => (
+            <span key={b} className="profile__badge">
+              {b}
+            </span>
+          ))}
+        </div>
+
+        <span className="profile__divider" aria-hidden="true" />
+
         {/* --- 联系方式（放在技能前，保证关键信息不被折叠） --- */}
         <div className="profile__block">
-          <h3 className="profile__block-title mono-label">Contact</h3>
+          <h3 className="profile__block-title mono-label">{t('profile.contact')}</h3>
           <ul className="profile__contacts">
             {contacts.map((c) => (
               <li key={c.label}>
@@ -115,7 +122,8 @@ export function ProfileSidebar() {
         {/* --- 技能条 --- */}
         <div className="profile__block">
           <h3 className="profile__block-title mono-label">
-            Skills<span className="profile__block-count">{skills.length}</span>
+            {t('profile.skills')}
+            <span className="profile__block-count">{skills.length}</span>
           </h3>
           <div className="profile__skills">
             {skills.map((skill, i) => (

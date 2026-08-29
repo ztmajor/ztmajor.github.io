@@ -162,7 +162,7 @@
 
 .wcard__year {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: var(--w-light);
   color: var(--text-4);
 }
@@ -226,6 +226,10 @@
 
 .wcard__stat {
   flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
   padding: 0 11px;
   border-left: 1px solid var(--line-1);
 }
@@ -237,11 +241,12 @@
 
 .wcard__stat dt {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: var(--w-normal);
   letter-spacing: 0.15em;
   color: var(--text-4);
-  margin-bottom: 3px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .wcard__stat dd {
@@ -251,6 +256,7 @@
   font-weight: var(--w-light);
   color: var(--accent);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
   transition: text-shadow var(--t-mid) var(--ease-out);
 }
 
@@ -269,7 +275,7 @@
 .wcard__tag {
   padding: 3px 9px;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: var(--w-light);
   letter-spacing: 0.05em;
   color: var(--text-3);

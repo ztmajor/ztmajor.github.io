@@ -1,0 +1,87 @@
+/* ==========================================================================
+   LanguageToggle —— 中 / EN 语言胶囊开关
+   样式与 ThemeToggle 保持一致
+   ========================================================================== */
+
+.lt {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 58px;
+  height: 28px;
+  padding: 0 8px;
+  flex: none;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: var(--tint-2);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color var(--t-fast) var(--ease-out),
+    background var(--t-fast) var(--ease-out),
+    box-shadow var(--t-mid) var(--ease-out);
+}
+
+.lt:hover {
+  border-color: var(--accent-soft);
+  background: var(--accent-faint);
+  box-shadow: 0 0 0 1px var(--accent-faint), 0 4px 16px -8px var(--accent-glow);
+}
+
+/* --- 滑块 --- */
+.lt__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(160deg, var(--accent), var(--accent-dim));
+  box-shadow:
+    0 0 10px -1px var(--accent-glow),
+    inset 0 1px 0 var(--hl-soft);
+  transition: transform var(--t-mid) var(--ease-out);
+}
+
+.lt.is-en .lt__knob {
+  transform: translateX(26px);
+}
+
+/* --- 文案 --- */
+.lt__label {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  font-size: 11px;
+  font-weight: var(--w-normal);
+  transition: color var(--t-mid) var(--ease-out);
+}
+
+.lt__label--zh {
+  font-family: var(--font-zh);
+  color: var(--bg-0);
+}
+
+.lt__label--en {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+}
+
+/* 当前生效的一侧被滑块盖住，文案压暗；未生效的一侧提亮 */
+.lt.is-en .lt__label--zh {
+  color: var(--text-3);
+}
+
+.lt.is-en .lt__label--en {
+  color: var(--bg-0);
+}
+
+.lt:hover .lt__label--en,
+.lt.is-en:hover .lt__label--zh {
+  color: var(--accent);
+}

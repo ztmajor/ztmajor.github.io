@@ -5,24 +5,24 @@
 const autolink = {
   slug: 'autolink',
   title: 'AutoLink',
-  eyebrow: 'OPEN SOURCE / COMPUTER VISION',
-  year: '2024',
+  eyebrow: '',
+  year: '2020',
   /** 卡片与列表页用的一句话摘要 */
   summary:
-    '基于图像识别与深度学习的连连看自动操作器。截图识别地图，算法求解可消去方块对，再模拟点击自动通关。',
-  tags: ['Python', 'PyTorch', 'OpenCV', 'Win32 API'],
+    '基于图像识别与深度学习的连连看自动操作器。截图识别当前游戏情况，转成矩阵之后通过算法求解可消去方块对，再模拟点击消去方块对，并且能自动通关。',
+  tags: ['PyTorch', 'OpenCV', 'Computer Vision','Win32 API', 'pyautogui'],
   /** 卡片封面图（public 下的相对路径） */
   cover: './works/autolink/cover.png',
   /** 卡片上的关键数据高亮 */
   stats: [
-    { label: 'MODULES', value: '6' },
-    { label: 'MAP SIZE', value: '11×8' },
+    { label: '操作模式', value: '自动' },
+    { label: 'AI', value: 'CV' },
     { label: 'MODE', value: 'AUTO' },
   ],
   links: [{ label: '查看 GitHub 仓库', href: 'https://github.com/ztmajor/AutoLink', primary: true }],
 
   tagline:
-    '基于图像识别与深度学习的连连看自动操作器。通过截图识别游戏地图，用算法求解可消去的方块对，再模拟鼠标点击完成整局自动通关。',
+    '基于图像识别与深度学习的连连看自动操作器。截图识别当前游戏情况，算法求解可消去方块对，再模拟点击自动通关。',
 
   blocks: [
     { type: 'heading', text: '项目简介' },

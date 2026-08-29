@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import './BlockRenderer.css';
 import inline from './inline.jsx';
 import useReveal from '../../hooks/useReveal.js';
+import Icon from '../ui/Icon.jsx';
+import Lightbox from '../ui/Lightbox.jsx';
 
 /**
  * 作品详情页的内容块渲染器。
@@ -17,6 +20,7 @@ import useReveal from '../../hooks/useReveal.js';
  */
 function Block({ block }) {
   const ref = useReveal({ threshold: 0.08 });
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   switch (block.type) {
     case 'heading':
@@ -56,18 +60,37 @@ function Block({ block }) {
 
     case 'gallery':
       return (
-        <div className="blk-gallery reveal" ref={ref}>
-          {block.items.map((img, i) => (
-            <figure key={i} className="blk-fig">
-              {/* frame 控制画框比例，小图用扁画框可避免大片留白 */}
-              <div className="blk-fig__frame" style={{ aspectRatio: block.frame ?? '4 / 3' }}>
-                <img src={img.src} alt={img.alt ?? ''} loading="lazy" />
-                <span className="blk-fig__corner" aria-hidden="true" />
-              </div>
-              {img.caption && <figcaption>{img.caption}</figcaption>}
-            </figure>
-          ))}
-        </div>
+        <>
+          <div className="blk-gallery reveal" ref={ref}>
+            {block.items.map((img, i) => (
+              <figure key={i} className="blk-fig">
+                {/* frame 控制画框比例，小图用扁画框可避免大片留白；整框可点，点击查看大图 */}
+                <button
+                  type="button"
+                  className="blk-fig__frame"
+                  style={{ aspectRatio: block.frame ?? '4 / 3' }}
+                  onClick={() => setLightboxIndex(i)}
+                  aria-label={`查看大图：${img.caption ?? img.alt ?? '图片'}`}
+                >
+                  <img src={img.src} alt={img.alt ?? ''} loading="lazy" />
+                  <span className="blk-fig__corner" aria-hidden="true" />
+                  <span className="blk-fig__zoom" aria-hidden="true">
+                    <Icon name="external" size={13} />
+                  </span>
+                </button>
+                {img.caption && <figcaption>{img.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+
+          {lightboxIndex !== null && (
+            <Lightbox
+              items={block.items}
+              startIndex={lightboxIndex}
+              onClose={() => setLightboxIndex(null)}
+            />
+          )}
+        </>
       );
 
     case 'cards':
