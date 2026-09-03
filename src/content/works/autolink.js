@@ -28,10 +28,11 @@ const autolink = {
     { type: 'heading', text: '项目简介' },
     {
       type: 'paragraph',
-      text: 'AutoLink 面向 Windows 平台的单机连连看游戏（运行在雷电模拟器中），实现了从截图、识图、求解到模拟点击的完整自动化闭环，目标是无人值守地持续通关。',
+      text: 'AutoLink 实现了在`Windows`上的使用`模拟器`自动玩单机连连看，实现了从截图、识图、求解到模拟点击的完整自动化闭环，目标是无人值守地持续通关。',
     },
     {
       type: 'gallery',
+      frame: '3 / 4',
       items: [
         { src: './works/autolink/cover.png', alt: 'AutoLink 主菜单界面', caption: '游戏主菜单界面' },
         { src: './works/autolink/diagram.jpg', alt: 'AutoLink 类图', caption: '核心模块类图' },
@@ -43,15 +44,15 @@ const autolink = {
     {
       type: 'list',
       items: [
-        { term: '图像获取器', text: '截取模拟器窗口画面，供后续识别使用' },
+        { term: '1 图像获取器', text: '截取模拟器窗口画面，供后续识别使用' },
         {
-          term: '图像处理器',
+          term: '2 图像处理器',
           text: '用模板匹配定位按钮，按格切分游戏区域，用 CNN 识别每格图案，生成数字矩阵；再验证消除条件、求解可消去的方块对',
         },
-        { term: '输出模拟器', text: '模拟鼠标点击识别到的按钮位置与待消除的方块坐标' },
-        { term: '数据集生成器', text: '对原始截图重命名、循环平移，扩充 CNN 训练数据' },
-        { term: '神经网络训练测试器', text: '基于 PyTorch 训练并测试方块分类模型' },
-        { term: '日志生成器', text: '记录运行过程，便于排查问题' },
+        { term: '3 输出模拟器', text: '模拟鼠标点击识别到的按钮位置与待消除的方块坐标' },
+        { term: '4 数据集生成器', text: '对原始截图重命名、循环平移，扩充 CNN 训练数据' },
+        { term: '5 神经网络训练测试器', text: '基于 PyTorch 训练并测试方块分类模型' },
+        { term: '6 日志生成器', text: '记录运行过程，便于排查问题' },
       ],
     },
     {
@@ -74,17 +75,17 @@ const autolink = {
     },
     {
       type: 'paragraph',
-      text: '以上情况统一采用**单对解生成**策略：每次只求解一对可消除的方块并立即执行，避免因布局变化导致的批量误判。',
+      text: '以上情况统一采用**逐步求解、即时刷新**策略：每次仅计算一对可消除的方块，执行消除操作后立即重新截取屏幕，基于最新布局再求解下一对。这样能避免一次生成所有操作对后，因消除过程中布局动态变化而导致的批量误判。',
     },
-    {
-      type: 'gallery',
-      // 这两张素材是很小的模式标签图（299×77 / 157×86），用扁画框避免留白
-      frame: '16 / 5',
-      items: [
-        { src: './works/autolink/endless.jpg', alt: '无尽模式截图', caption: '无尽模式（7×6）' },
-        { src: './works/autolink/fast.jpg', alt: '极速模式截图', caption: '极速模式（11×8）' },
-      ],
-    },
+    // {
+    //   type: 'gallery',
+    //   // 这两张素材是很小的模式标签图（299×77 / 157×86），用扁画框避免留白
+    //   frame: '16 / 5',
+    //   items: [
+    //     { src: './works/autolink/endless.jpg', alt: '无尽模式截图', caption: '无尽模式（7×6）' },
+    //     { src: './works/autolink/fast.jpg', alt: '极速模式截图', caption: '极速模式（11×8）' },
+    //   ],
+    // },
 
     { type: 'heading', text: '待解决的问题' },
     {

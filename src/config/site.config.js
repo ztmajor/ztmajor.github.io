@@ -5,7 +5,7 @@
 
 export const siteConfig = {
   /** 浏览器标签页标题 */
-  title: 'AI Engineer · Portfolio',
+  title: 'ZtMajor · Portfolio',
 
   /** 左上角品牌标记（建议 2-4 个字符） */
   brand: 'Info/ztmajor',

@@ -21,14 +21,14 @@ const dscoder = {
     'Tauri 桌面版 DeepSeek Harness —— 个人定制版。',
 
   blocks: [
-    { type: 'heading', text: '项目简介' },
+    { type: 'heading', text: 'Motivation' },
     {
       type: 'paragraph',
       text: '最近重度依赖 DSH（DeepSeek Harness），但每次都得在不同设备上先打开终端再敲命令的方式启动，实在麻烦。去社区找现成的桌面套壳方案，发现很多项目确实能用，但普遍集成了大量我用不上的插件，不够清爽。',
     },
     {
       type: 'paragraph',
-      text: '其实我也试过 VS Code 里的 DSH 插件版——毕竟我是 VS Code 的重度用户——但恰巧我刚写完一个 Tauri 项目，手正热，想再拿 Tauri 练练手巩固一下，于是决定自己写一个。',
+      text: '其实我也试过 VS Code 里的 DSH 插件版——毕竟我是 VS Code 的重度用户——但恰巧我刚写完一个 `Tauri` 项目，手正热，想再拿 `Tauri` 练练手巩固一下，于是决定自己写一个。',
     },
     {
       type: 'paragraph',
@@ -54,13 +54,13 @@ const dscoder = {
     {
       type: 'list',
       items: [
-        { term: '启动快', text: 'Tauri 桌面壳，直接复用 DeepSeek Harness 官方 Web UI 的完整能力。' },
+        { term: '启动快', text: '`Tauri` 桌面壳，直接复用 DeepSeek Harness 官方 Web UI 的完整能力。' },
         { term: '开箱即用', text: '安装包内嵌 Node + dsh 运行时，目标机器免装 Node、免联网即可运行。' },
         { term: '实用插件', text: '置文件树 / 标签页 / 终端、余额信息栏 / 本地版本管理 / 任务看板 等插件，首次启动自动装好' },
         { term: '自动更新', text: 'GitHub Releases 驱动，发现新版弹窗提示，一键更新并自动重启' },
         { term: '干净隔离', text: '运行时与数据全部收进独立目录，不碰安装的其他 dsh' },
-        { term: '代码高亮', text: '使用 highlight.js 实现语法高亮，增强文本代码的可读性' },
-        { term: '本地代码管理（BETA）', text: '构建 .dsh-git 文件，实现本地版本管理。方便回滚，无需把代码托管到云端' },
+        { term: '代码高亮', text: '使用 `highlight.js` 实现语法高亮，增强文本代码的可读性' },
+        { term: '本地代码管理（BETA）', text: '构建 `.dsh-git` 文件，实现本地版本管理。方便回滚，无需把代码托管到云端' },
       ],
     },
 
