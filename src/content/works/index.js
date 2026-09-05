@@ -8,9 +8,11 @@
  * 其余（列表卡片、详情页路由、上下篇导航）全部自动生成。
  */
 import autolink from './autolink.js';
+import pvz3d from './pvz3d.js';
+import autoctrl from './autoctrl.js';
 import dscoder from './dscoder.js';
 
-export const works = [dscoder, autolink];
+export const works = [dscoder, autoctrl, pvz3d, autolink];
 
 /** 按 slug 取单个作品 */
 export const getWorkBySlug = (slug) => works.find((w) => w.slug === slug);
